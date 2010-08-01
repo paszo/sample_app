@@ -1,16 +1,12 @@
-<table class="profile">
+<table>
   <tr>
     <td class="main">
-      <h2>
-        <%= gravatar_for @user %>
-        <%= h @user.name %>
-      </h2>
-      <%= render 'follow_form' if signed_in? %>
-      <% unless @user.microposts.empty? %>
-        <table class="microposts">
-          <%= render @microposts %>
-        </table>
-      <%= will_paginate @microposts %>
+      <h2><%= @title %></h2>
+      <% unless @users.empty? %>
+      <ul class="users">
+        <%= render @users %>
+      </ul>
+      <%= will_paginate @users %>
       <% end %>
     </td>
     <td class="sidebar round">
@@ -18,6 +14,13 @@
       <strong>URL</strong> <%= link_to user_path(@user), @user %><br />
       <strong>Microposts</strong> <%= @user.microposts.count %>
       <%= render 'pages/stats' %>
+      <% unless @users.empty? %>
+      <% @users.each do |user| %>
+      <%= link_to gravatar_for(user, :size => 30), user  %>
+      <% end %>
+      <% end %>
     </td>
   </tr>
 </table>
+
+
